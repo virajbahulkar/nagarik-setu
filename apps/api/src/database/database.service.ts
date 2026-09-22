@@ -1,5 +1,5 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import { Pool } from 'pg';
+import { Pool, type PoolClient } from 'pg';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
@@ -12,7 +12,10 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   });
 
   async onModuleInit(): Promise<void> {
-    await this.checkConnection();
+    const isConnected = await this.checkConnection();
+    if (!isConnected) {
+      throw new Error('Database connection failed during API bootstrap');
+    }
   }
 
   async onModuleDestroy(): Promise<void> {
@@ -20,12 +23,15 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   }
 
   async checkConnection(): Promise<boolean> {
-    const client = await this.pool.connect();
+    let client: PoolClient | undefined;
     try {
+      client = await this.pool.connect();
       await client.query('SELECT 1');
       return true;
+    } catch {
+      return false;
     } finally {
-      client.release();
+      client?.release();
     }
   }
 

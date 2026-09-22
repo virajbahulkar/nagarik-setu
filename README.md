@@ -21,18 +21,18 @@ packages/
    ```bash
    cp .env.example .env
    ```
-2. Install dependencies:
+2. (Optional) Install dependencies on host for local lint/test commands:
    ```bash
    npm install
    ```
-3. Start platform services:
+3. Start platform services (Compose runs a one-time `deps` install container first):
    ```bash
    docker compose up --build
    ```
 4. Run migrations and seed data:
    ```bash
-   docker compose exec api npm run db:migrate
-   docker compose exec api npm run db:seed
+   npm run db:migrate
+   npm run db:seed
    ```
 
 ## Services

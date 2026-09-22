@@ -8,7 +8,7 @@ VALUES (
   ST_GeomFromText('MULTIPOLYGON(((73.75 18.45, 73.98 18.45, 73.98 18.62, 73.75 18.62, 73.75 18.45)))', 4326),
   true
 )
-ON CONFLICT DO NOTHING;
+ON CONFLICT (name) DO NOTHING;
 
 WITH j AS (
   SELECT id FROM jurisdictions WHERE name = 'Pune Municipal Corporation - Synthetic' LIMIT 1

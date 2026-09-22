@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS issues (
 );
 
 CREATE INDEX IF NOT EXISTS idx_jurisdictions_boundary ON jurisdictions USING GIST (boundary);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_jurisdictions_name_unique ON jurisdictions (name);
 CREATE INDEX IF NOT EXISTS idx_wards_boundary ON wards USING GIST (boundary);
 CREATE INDEX IF NOT EXISTS idx_issues_location ON issues USING GIST (location);
 CREATE INDEX IF NOT EXISTS idx_issues_status ON issues (status);
