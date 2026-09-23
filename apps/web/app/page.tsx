@@ -1,4 +1,6 @@
-export default function Home(): JSX.Element {
+import type { ReactNode } from 'react';
+
+export default function Home(): ReactNode {
   return (
     <main>
       <h1>NagrikSetu Web Portal (Foundation)</h1>
