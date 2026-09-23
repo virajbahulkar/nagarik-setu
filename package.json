@@ -12,13 +12,15 @@
     "packages/config"
   ],
   "scripts": {
-    "dev": "docker-compose up",
-    "dev:down": "docker-compose down",
-    "dev:logs": "docker-compose logs -f",
-    "db:migrate": "docker-compose exec api npm run db:migrate",
-    "db:seed": "docker-compose exec api npm run db:seed",
-    "test": "docker-compose exec api npm run test",
-    "lint": "docker-compose exec api npm run lint"
+    "dev": "docker compose up --build",
+    "dev:down": "docker compose down",
+    "dev:logs": "docker compose logs -f",
+    "dev:api": "npm --workspace @nagriksetu/api run start:dev",
+    "dev:web": "npm --workspace @nagriksetu/web run dev",
+    "db:migrate": "npm --workspace @nagriksetu/api run db:migrate",
+    "db:seed": "npm --workspace @nagriksetu/api run db:seed",
+    "test": "npm --workspace @nagriksetu/api run test",
+    "lint": "npm --workspace @nagriksetu/api run lint"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
